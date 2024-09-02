@@ -11,14 +11,14 @@ namespace CGV_Simple.Models
 		public string Street { get; set; }
 		public string Neighborhood { get; set; }
 		public State State { get; set; }
-		public string Cep { get; set; }
+		public string Zip { get; set; }
 		public string Number { get; set; }
 		public string Complement { get; set; } = string.Empty;
 
-		public Address(State state, string cep, string street, string neighborhood, string number, string complement = "")
+		public Address(State state, string zip, string street, string neighborhood, string number, string complement = "")
 		{
 			State = state;
-			Cep = cep;
+			Zip = zip;
 			Street = street;
 			Neighborhood = neighborhood;
 			Number = number;
@@ -28,7 +28,7 @@ namespace CGV_Simple.Models
 		public bool ValidateCep()
 		{
 			var cepRegex = new Regex(@"^[0-9]{5}-[0-9]{3}$");
-			return cepRegex.IsMatch(Cep);
+			return cepRegex.IsMatch(Zip);
 		}
 	}
 

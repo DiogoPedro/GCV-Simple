@@ -52,6 +52,22 @@ namespace GCV_Simple.Controllers
 		{
 			try
 			{
+				// Verifica se o ZipCode contém apenas números
+				if (!System.Text.RegularExpressions.Regex.IsMatch(NewLawyer.Address.Zip, @"^\d+$"))
+				{
+					return BadRequest("Zip code must contain only numbers.");
+				}
+
+				if (!Enum.IsDefined(typeof(State), NewLawyer.Address.State))
+				{
+					return BadRequest("Invalid state value.");
+				}
+
+				if (string.IsNullOrEmpty(NewLawyer.Id))
+				{
+					NewLawyer.Id = Guid.NewGuid().ToString();
+				}
+
 				_lawyerService.AddLawyer(NewLawyer);
 				return Ok("Lawyer created successfully");
 			}
